@@ -1,0 +1,39 @@
+# nginx.conf.j2 - Managed by pyinfra
+
+user {{ host.data.get('web_user', 'www-data') }};
+worker_processes auto;
+pid /run/nginx.pid;
+
+events {
+    worker_connections {{ host.data.get('nginx_max_clients', 768) }};
+}
+
+http {
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    keepalive_timeout 65;
+    types_hash_max_size 2048;
+
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+
+    # Logging - uses the hostname gathered by pyinfra
+    access_log /var/log/nginx/access.log;
+    error_log /var/log/nginx/error.log;
+
+    server {
+        listen 80;
+        server_name {{ host.data.get('domain_name', []) }};
+
+        root {{ host.data.get('doc_root', '/var/www/html') }};
+        index index.html index.htm;
+
+        location / {
+            try_files $uri $uri/ =404;
+        }
+
+        # Example of dynamic comment using pyinfra facts
+        # Rendered for: {{ os_name | default('Unknown OS') }} {{ major | default('0') | int }}
+    }
+}
