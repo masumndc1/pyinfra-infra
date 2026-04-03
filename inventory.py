@@ -6,27 +6,19 @@ cloud_servers = [
 ]
 
 incus_nodes = [
-    "sys-alma9-dev1",
-    "sys-deb12-dev1",
-    "sys-deb13-dev1",
-    "sys-suse-dev1",
-    "sys-ubu24-dev1",
+    ("sys-alma9-dev1", {"extra_pkgs": ["snapd"], "web_user": "nginx"}),
+    ("sys-deb12-dev1", {"extra_pkgs": ["snapd"]}),
+    ("sys-deb13-dev1", {"extra_pkgs": ["snapd"]}),
+    ("sys-suse-dev1"),
+    ("sys-ubu24-dev1", {"extra_pkgs": ["snapd"]}),
 ]
 
-# List of database servers
-# example of setting single vars of group
-# db_server = (
-#    ["db-1.net", "db-2.net"],  # List of hosts
-#    {"db_port": 5432,          # Group data dictionary
-#     "ssh_user": "ubuntu",
-#     "ssh_key": "~/.ssh/id_rsa",
-#     "env": "production",
-#    }
-# )
-
-# example of host specific data
-# Hostname string + dictionary of host-specific data
-# app_servers = [
-#   ("app-1.net", {"app_version": "1.2.0", "is_primary": True}),
-#   ("app-2.net", {"app_version": "1.1.0", "is_primary": False}),
-# ]
+web_server = (
+    ["sys-alma9-dev1", "sys-ubu24-dev1"],
+    {
+        "web_port": 8080,
+        "domain_name": "masum.com",
+        "env": "prod",
+        "max_client": 32,
+    },
+)
