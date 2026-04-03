@@ -1,7 +1,7 @@
 # List of all servers
 cloud_servers = [
     "cloud-ubu",
-    "cloud-hpc",
+    # "cloud-hpc",
     # ("devstack", {"ssh_port": 22}),  # Host with custom data
 ]
 
