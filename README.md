@@ -3,6 +3,7 @@ practise on pyinfra
 
 # execution of code
 
+```
 ❯ pyinfra inventory.py operations/nginx.py -y --limit web_server
 --> Loading config...
 --> Loading inventory...
@@ -42,4 +43,4 @@ practise on pyinfra
     Grand total           6       2         -       4
 
 --> Disconnecting from hosts...
-
+```
