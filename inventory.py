@@ -1,4 +1,9 @@
 # List of all servers
+# pyinfra inventory format:
+# hosts = {
+#     "hostname": {"data": {...}},
+# }
+
 cloud_servers = [
     "cloud-ubu",
     # "cloud-hpc",
@@ -22,3 +27,20 @@ web_server = (
         "max_client": 32,
     },
 )
+
+monitor_server = ["lap-macmini"]
+
+monitor_nodes = [
+    ("puppet-dev1", {"ip": "192.168.5.55"}),
+    ("puppet-dev2", {"ip": "192.168.5.181"}),
+    ("puppet-dev3", {"ip": "192.168.5.80"}),
+    ("puppet-prod1", {"ip": "192.168.5.211"}),
+    ("puppet-prod2", {"ip": "192.168.5.146"}),
+    ("puppet-prod3", {"ip": "192.168.5.223"}),
+    ("puppetmaster", {"ip": "192.168.5.176"}),
+    ("sys-alma9-dev1", {"ip": "192.168.5.26"}),
+    ("sys-deb12-dev1", {"ip": "192.168.5.212"}),
+    ("sys-deb13-dev1", {"ip": "192.168.5.86"}),
+    ("sys-suse-dev1", {"ip": "192.168.5.154"}),
+    ("sys-ubu24-dev1", {"ip": "192.168.5.87"}),
+]
