@@ -1,0 +1,20 @@
+{% if os_name in ["Debian", "Ubuntu"] %}
+# OpenVox 8 {{ os_name | lower }}{{ major }} Repository
+deb [signed-by=/usr/share/keyrings/openvox-keyring.gpg] https://apt.voxpupuli.org {{ os_name | lower }}{{ major }} openvox8
+
+{% elif os_name in ["CentOS", "RedHat", "AlmaLinux"] %}
+[openvox8]
+name=OpenVox 8 el8 Repository
+baseurl=https://yum.voxpupuli.org/openvox8/el/{{ major }}/$basearch
+enabled=1
+gpgcheck=1
+gpgkey=https://yum.voxpupuli.org/GPG-KEY-openvox.pub
+
+{% elif os_name in ["openSUSE Tumbleweed"] %}
+[openvox8]
+name=OpenVox 8 el8 Repository
+baseurl=https://yum.voxpupuli.org/openvox8/el/8/$basearch
+enabled=1
+gpgcheck=1
+gpgkey=https://yum.voxpupuli.org/GPG-KEY-openvox.pub
+{% endif %}
