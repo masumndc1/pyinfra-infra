@@ -39,6 +39,8 @@ elif os_name in ["CentOS", "RedHat", "AlmaLinux"]:
         src="templates/openbolt.j2",
         dest="/etc/yum.repos.d/openbolt.repo",
         mode="644",
+        os_name=os_name,
+        major=major,
         _sudo=True,
     )
     yum.packages(
@@ -54,6 +56,8 @@ elif os_name in ["openSUSE Tumbleweed"]:
         src="templates/openbolt.j2",
         dest="/etc/zypp/repos.d/openbolt.repo",
         mode="644",
+        os_name=os_name,
+        major=major,
         _sudo=True,
     )
     zypper.packages(
