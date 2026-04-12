@@ -17,14 +17,9 @@ if os_name in ["Debian", "Ubuntu"]:
         dest="/usr/share/keyrings/openvox-keyring.gpg",
         _sudo=True,
     )
-    files.template(
-        name="create repo file for openbolt",
-        src="templates/openbolt.j2",
-        dest="/etc/apt/sources.list.d/openbolt.list",
-        mode="644",
-        os_name=os_name,
-        major=major,
-        _sudo=True,
+    apt.repo(
+        name="Install openbolt repo",
+        src="https://apt.voxpupuli.org {{ name | lower }}{{ major }} openvox8",
     )
     apt.packages(
         name="Install openbox agent",
@@ -34,14 +29,9 @@ if os_name in ["Debian", "Ubuntu"]:
     )
 
 elif os_name in ["CentOS", "RedHat", "AlmaLinux"]:
-    files.template(
-        name="create repo file for openbolt",
-        src="templates/openbolt.j2",
-        dest="/etc/yum.repos.d/openbolt.repo",
-        mode="644",
-        os_name=os_name,
-        major=major,
-        _sudo=True,
+    yum.repo(
+        name="Install openbolt repo",
+        src="https://yum.voxpupuli.org/openvox8/el/{{ major }}/$basearch",
     )
     yum.packages(
         name="Install openbolt agent",
@@ -51,14 +41,9 @@ elif os_name in ["CentOS", "RedHat", "AlmaLinux"]:
     )
 
 elif os_name in ["openSUSE Tumbleweed"]:
-    files.template(
-        name="create repo file for openbolt",
-        src="templates/openbolt.j2",
-        dest="/etc/zypp/repos.d/openbolt.repo",
-        mode="644",
-        os_name=os_name,
-        major=major,
-        _sudo=True,
+    zypper.repo(
+        name="Install openbolt repo",
+        src="https://yum.voxpupuli.org/openvox8/el/8/$basearch",
     )
     zypper.packages(
         name="Install openbolt agent",
