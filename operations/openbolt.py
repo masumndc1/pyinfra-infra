@@ -19,7 +19,8 @@ if os_name in ["Debian", "Ubuntu"]:
     )
     apt.repo(
         name="Install openbolt repo",
-        src="https://apt.voxpupuli.org {{ name | lower }}{{ major }} openvox8",
+        src=f"deb https://apt.voxpupuli.org {os_name.lower()}{major} openvox8",
+        _sudo=True,
     )
     apt.packages(
         name="Install openbox agent",
@@ -31,7 +32,8 @@ if os_name in ["Debian", "Ubuntu"]:
 elif os_name in ["CentOS", "RedHat", "AlmaLinux"]:
     yum.repo(
         name="Install openbolt repo",
-        src="https://yum.voxpupuli.org/openvox8/el/{{ major }}/$basearch",
+        src=f"https://yum.voxpupuli.org/openvox8/el/{major}/$basearch",
+        _sudo=True,
     )
     yum.packages(
         name="Install openbolt agent",
@@ -44,6 +46,7 @@ elif os_name in ["openSUSE Tumbleweed"]:
     zypper.repo(
         name="Install openbolt repo",
         src="https://yum.voxpupuli.org/openvox8/el/8/$basearch",
+        _sudo=True,
     )
     zypper.packages(
         name="Install openbolt agent",
