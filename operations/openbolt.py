@@ -7,6 +7,7 @@ from pyinfra.facts.server import LinuxDistribution
 start = time.time()
 distro = host.get_fact(LinuxDistribution)
 os_name = distro["name"]
+version_id = distro["release_meta"]["VERSION_ID"]
 major = distro["major"]
 
 # Update package list and install packages
@@ -19,7 +20,8 @@ if os_name in ["Debian", "Ubuntu"]:
     )
     apt.repo(
         name="Install openbolt repo",
-        src=f"deb https://apt.voxpupuli.org {os_name.lower()}{major} openvox8",
+        src=f"deb [signed-by=/usr/share/keyrings/openvox-keyring.gpg] https://apt.voxpupuli.org {os_name.lower()}{version_id} openvox8",
+        filename="openvox",
         _sudo=True,
     )
     apt.packages(
