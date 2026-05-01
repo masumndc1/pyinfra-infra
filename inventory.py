@@ -18,6 +18,11 @@ incus_nodes = [
     ("sys-ubu24-dev1", {"extra_pkgs": ["snapd"]}),
 ]
 
+colima_nodes = (
+    ["keystone-alma9-dev9", "db-alma9-dev9"],
+    {"ssh_config_file": "./ssh.config"},
+)
+
 web_server = (
     ["sys-alma9-dev1", "sys-ubu24-dev1"],
     {
